@@ -60,6 +60,9 @@ import { productCategoryApi } from "~/features/product-categories/data/productCa
 import productReducer from "~/features/products/data/productSlice";
 import { productApi } from "~/features/products/data/productApi";
 
+// ⚙️  Orders Feature
+import { orderApi } from "~/features/orders/data/orderApi";
+
 export const store = configureStore({
   reducer: {
     // ✅ App Configuration state + API
@@ -120,6 +123,9 @@ export const store = configureStore({
     // ✅ Product state + API
     product: productReducer,
     [productApi.reducerPath]: productApi.reducer,
+
+    // ✅ Orders API (admin)
+    [orderApi.reducerPath]: orderApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
@@ -137,6 +143,7 @@ export const store = configureStore({
       contactApi.middleware,
       productCategoryApi.middleware,
       productApi.middleware,
+      orderApi.middleware,
     ),
 });
 

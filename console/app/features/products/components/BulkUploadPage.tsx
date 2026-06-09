@@ -413,7 +413,7 @@ export default function BulkUploadPage() {
         <div className="flex gap-2">
           <Button variant="outline" asChild>
             <a
-              href="/templates/AmbikaTraders_Product_Upload_Template.xlsx"
+              href="/templates/Toys_Kids_Upload_Template.xlsx"
               download
             >
               <FileSpreadsheet className="mr-2 h-4 w-4" />
@@ -1031,7 +1031,7 @@ export default function BulkUploadPage() {
 //           {/* Template download — put the .xlsx in your public/templates/ folder */}
 //           <Button variant="outline" asChild>
 //             <a
-//               href="/templates/AmbikaTraders_Product_Upload_Template.xlsx"
+//               href="/templates/Toys_and_kids_Product_Upload_Template.xlsx"
 //               download
 //             >
 //               <FileSpreadsheet className="mr-2 h-4 w-4" />

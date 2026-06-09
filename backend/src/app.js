@@ -15,6 +15,7 @@ import { fileURLToPath } from "url";
 
 // 🧩 Local Imports
 import "./config/passport.js";
+import "./config/customerPassport.js"; // Customer Google OAuth (separate strategy)
 // import connectDB from "./config/db.js";
 import errorHandler from "./middleware/errorHandler.js";
 
@@ -38,6 +39,9 @@ import uploadRoutes from "./routes/upload.routes.js";
 import productCategoryRoutes from "./routes/productCategory.routes.js";
 import productRoutes from "./routes/product.routes.js";
 import bulkUploadRoutes from "./routes/bulkUpload.routes.js";
+import customerRoutes from "./routes/customerAuth.routes.js";
+import orderRoutes from "./routes/order.routes.js";
+import adminOrderRoutes from "./routes/adminOrder.routes.js";
 
 // ===============================================
 // 🧠 Environment Config
@@ -168,6 +172,9 @@ app.use(`${routePrefix}/upload`, uploadRoutes);
 app.use(`${routePrefix}/product-categories`, productCategoryRoutes);
 app.use(`${routePrefix}/products`, productRoutes);
 app.use(`${routePrefix}/bulk-upload`, bulkUploadRoutes);
+app.use(`${routePrefix}/customer`, customerRoutes);
+app.use(`${routePrefix}/orders`, orderRoutes);
+app.use(`${routePrefix}/admin/orders`, adminOrderRoutes);
 
 // ===============================================
 // 🩵 Health Check

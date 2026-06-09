@@ -40,6 +40,10 @@ export default [
 
       ...createCrudRoutes("product-categories"),
 
+      // Orders — list + detail (no create/edit form, managed inline)
+      route("orders", "features/orders/index.tsx"),
+      route("orders/:id", "features/orders/detail.tsx"),
+
       // Single Routes -> Model / Pop Form / Chat Box / AI Agents / Etc.
 
       route("feedback", "features/feedback/index.tsx"),

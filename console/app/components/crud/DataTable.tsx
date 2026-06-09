@@ -129,14 +129,14 @@ export function DataTable<TData, TValue>({
     <div className="w-full">
       {/* 🔍 Search + Column Toggle */}
       <div className="flex items-center py-4">
-        <Input
+        {/* <Input
           placeholder={`Filter by ${searchKey}...`}
           value={(table.getColumn(searchKey)?.getFilterValue() as string) ?? ""}
           onChange={(e) =>
             table.getColumn(searchKey)?.setFilterValue(e.target.value)
           }
           className="max-w-xs"
-        />
+        /> */}
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" className="ml-auto">

@@ -17,7 +17,7 @@ import ProductCategory from "../models/productCategory.model.js";
 import { uploadBufferToCloudinary } from "../utils/cloudinaryService.js";
 import multer from "multer";
 
-const CLOUDINARY_FOLDER = "ambikaTraders/products";
+const CLOUDINARY_FOLDER = "toys-and-kids-website/products";
 const BATCH_SIZE = 500;
 
 // ─── Multer ───────────────────────────────────────────────────────────────────
@@ -137,20 +137,24 @@ function validateRow(row, excelRowNum, imageFileMap, categoryMap) {
 
   if (!row.spec_material?.toString().trim())
     errors.push(`Row ${excelRowNum}: 'spec_material' is required.`);
-  if (!row.variant_finish?.toString().trim())
-    errors.push(`Row ${excelRowNum}: 'variant_finish' is required.`);
+  if (!row.variant_sku?.toString().trim())
+    errors.push(`Row ${excelRowNum}: 'variant_sku' is required.`);
+  if (!row.variant_color?.toString().trim())
+    errors.push(`Row ${excelRowNum}: 'variant_color' is required.`);
+  // if (!row.variant_finish?.toString().trim())
+  //   errors.push(`Row ${excelRowNum}: 'variant_finish' is required.`);
   if (
-    row.variant_size_value === undefined ||
-    row.variant_size_value === "" ||
-    isNaN(Number(row.variant_size_value))
+    row.variant_size === undefined ||
+    row.variant_size === "" 
+    // || isNaN(Number(row.variant_size_value))
   )
     errors.push(
-      `Row ${excelRowNum}: 'variant_size_value' must be a valid number.`,
+      `Row ${excelRowNum}: 'variant_size_value' must be a valid string.`,
     );
-  if (!["mm", "inch", "cm"].includes(row.variant_size_unit?.toString().trim()))
-    errors.push(
-      `Row ${excelRowNum}: 'variant_size_unit' must be mm, inch, or cm.`,
-    );
+  // if (!["mm", "inch", "cm"].includes(row.variant_size_unit?.toString().trim()))
+  //   errors.push(
+  //     `Row ${excelRowNum}: 'variant_size_unit' must be mm, inch, or cm.`,
+  //   );
 
   if (row.variant_price !== undefined && row.variant_price !== "") {
     if (isNaN(Number(row.variant_price)) || Number(row.variant_price) < 0)
@@ -209,11 +213,13 @@ function rowToVariant(row, cloudinaryMap) {
   };
   return {
     sku: row.variant_sku?.toString().trim() || undefined,
-    finish: row.variant_finish.toString().trim(),
-    size: {
-      value: Number(row.variant_size_value),
-      unit: row.variant_size_unit.toString().trim(),
-    },
+    // color: row.variant_color?.toString().trim() || undefined,
+    // size: {
+    //   value: Number(row.variant_size_value),
+    //   unit: row.variant_size_unit.toString().trim(),
+    // },
+    color: row.variant_color?.toString().trim() || undefined,
+    size: row.variant_size?.toString().trim() || undefined,
     price: row.variant_price ? Number(row.variant_price) : undefined,
     discountPrice: row.variant_discountPrice
       ? Number(row.variant_discountPrice)
@@ -255,13 +261,26 @@ function groupRowsIntoProducts(rows, cloudinaryMap, categoryMap) {
         ].filter(Boolean),
         specifications: {
           material: row.spec_material.toString().trim(),
-          mechanism: row.spec_mechanism?.toString().trim() || undefined,
-          weightCapacity:
-            row.spec_weightCapacity?.toString().trim() || undefined,
-          packagingUnit: row.spec_packagingUnit?.toString().trim() || "Piece",
+          batteryRequired: row.spec_batteryRequired === true || row.spec_batteryRequired === "TRUE",
+          batteryType: row.spec_batteryType?.toString().trim() || undefined,
+          dimensions: row.spec_dimensions?.toString().trim() || undefined,
+          weight: row.spec_weight?.toString().trim() || undefined,
+          safetyStandards: row.spec_safetyStandards
+            ? row.spec_safetyStandards.toString().split(",").map(s => s.trim()).filter(Boolean)
+            : [],
+          includedItems: row.spec_includedItems
+            ? row.spec_includedItems.toString().split(",").map(s => s.trim()).filter(Boolean)
+            : [],
         },
         variants: [],
-        isFeatured: false,
+        price: row.price ? Number(row.price) : 0,
+        originalPrice: row.originalPrice ? Number(row.originalPrice) : null,
+        ageGroup: row.ageGroup?.toString().trim() || "all",
+        badge: row.badge?.toString().trim() || null,
+        inStock: row.inStock === false || row.inStock === "FALSE" ? false : true,
+        stockQuantity: row.stockQuantity ? Number(row.stockQuantity) : 0,
+        isFeatured: row.isFeatured === true || row.isFeatured === "TRUE" ? true : false,
+        // isFeatured: false,
         isActive: true,
       });
     }

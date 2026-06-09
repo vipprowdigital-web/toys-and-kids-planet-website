@@ -26,6 +26,7 @@ import {
   Globe,
   Boxes,
   Package,
+  ShoppingBag,
 } from "lucide-react";
 import { NavMain } from "~/components/nav-main";
 import { NavProjects } from "~/components/nav-projects";
@@ -126,6 +127,12 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         url: "/admin/product-categories",
         icon: Boxes,
         isActive: isActive("/admin/product-categories"),
+      },
+      {
+        title: "Orders",
+        url: "/admin/orders",
+        icon: ShoppingBag,
+        isActive: isActive("/admin/orders"),
       },
     ],
 
