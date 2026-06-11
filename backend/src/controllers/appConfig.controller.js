@@ -15,6 +15,7 @@ export const getPublicAppConfig = async (req, res) => {
     }
 
     return res.status(200).json({
+      success: true,
       message: "Public App Config fetched successfully.",
       data: latestConfig,
     });

@@ -9,6 +9,9 @@
  * Google login will return a clear error message instead of crashing at boot.
  */
 
+import dotenv from "dotenv";
+dotenv.config(); // Must run before reading process.env — app.js calls it too late (after imports)
+
 import passport from "passport";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 import Customer from "../models/customer.model.js";
@@ -17,8 +20,8 @@ const CLIENT_ID = process.env.GOOGLE_CLIENT_ID_CUSTOMER;
 const CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET_CUSTOMER;
 
 const isConfigured =
-  CLIENT_ID &&
-  CLIENT_SECRET &&
+  !!CLIENT_ID &&
+  !!CLIENT_SECRET &&
   CLIENT_ID !== "your_google_client_id_here" &&
   CLIENT_SECRET !== "your_google_client_secret_here";
 
@@ -54,6 +57,7 @@ if (isConfigured) {
             if (!customer.googleId) customer.googleId = profile.id;
             if (!customer.avatar && profile.photos?.[0]?.value)
               customer.avatar = profile.photos[0].value;
+            customer.provider = "google";
             customer.isVerified = true;
           }
 
@@ -65,13 +69,12 @@ if (isConfigured) {
       },
     ),
   );
-
   console.log("✅ Customer Google OAuth strategy registered.");
 } else {
   console.warn(
     "⚠️  Customer Google OAuth is NOT configured. " +
-    "Set GOOGLE_CLIENT_ID_CUSTOMER and GOOGLE_CLIENT_SECRET_CUSTOMER in .env to enable it. " +
-    "Email OTP login works without it.",
+      "Set GOOGLE_CLIENT_ID_CUSTOMER and GOOGLE_CLIENT_SECRET_CUSTOMER in .env to enable it. " +
+      "Email OTP login works without it.",
   );
 }
 

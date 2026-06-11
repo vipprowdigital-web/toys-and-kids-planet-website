@@ -134,6 +134,12 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         icon: ShoppingBag,
         isActive: isActive("/admin/orders"),
       },
+      {
+        title: "Reviews",
+        url: "/admin/product-reviews",
+        icon: UserStar,
+        isActive: isActive("/admin/product-reviews"),
+      },
     ],
 
     customerFeedbackNav: [

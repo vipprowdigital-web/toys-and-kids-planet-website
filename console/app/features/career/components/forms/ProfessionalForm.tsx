@@ -30,7 +30,7 @@ export default function ProfessionalForm() {
   const handleSubmit = async () => {
     try {
       // 🔹 Abhi sirf console (API baad me connect karenge)
-      console.log("Professional Details:", values);
+      // console.log("Professional Details:", values);
 
       toast.success("Professional details saved");
     } catch (err) {

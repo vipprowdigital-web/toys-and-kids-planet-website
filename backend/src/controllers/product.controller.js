@@ -7,7 +7,7 @@ import Product from "../models/product.model.js";
 const CLOUDINARY_FOLDER = "toysKidsPlanet/products";
 
 // @desc    Create a new product
-// @route   POST /api/products
+// @route   POST /api/v1/products
 // @access  Private/Admin
 const createProduct = async (req, res) => {
   try {
@@ -86,7 +86,7 @@ const createProduct = async (req, res) => {
 };
 
 // @desc    Get all products with Pagination and Query Filtering
-// @route   GET /api/products
+// @route   GET /api/v1/products
 // @access  Public
 const getAllProducts = async (req, res) => {
   try {
@@ -141,7 +141,7 @@ const getAllProducts = async (req, res) => {
 };
 
 // @desc    Get single product by Slug or ID
-// @route   GET /api/products/:slugOrId
+// @route   GET /api/v1/products/:slugOrId
 // @access  Public
 const getProductById = async (req, res) => {
   try {
@@ -164,7 +164,7 @@ const getProductById = async (req, res) => {
 };
 
 // @desc    Update a whole product record (Full Overwrite)
-// @route   PUT /api/products/:id
+// @route   PUT /api/v1/products/:id
 // @access  Private/Admin
 const updateProductFull = async (req, res) => {
   try {
@@ -258,7 +258,7 @@ const updateProductFull = async (req, res) => {
 };
 
 // @desc    Patch partial product fields
-// @route   PATCH /api/products/:id
+// @route   PATCH /api/v1/products/:id
 // @access  Private/Admin
 const patchProductPartial = async (req, res) => {
   try {

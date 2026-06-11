@@ -1,9 +1,13 @@
 // src/app.js
 
+// Must be the first import — loads .env into process.env before any local
+// module (e.g. customerPassport.js) reads from it during initialisation.
+// import "dotenv/config";
+import dotenv from "dotenv";
+
 import express from "express";
 import session from "express-session";
 import passport from "passport";
-import dotenv from "dotenv";
 import morgan from "morgan";
 import helmet from "helmet";
 import cors from "cors";
@@ -13,6 +17,7 @@ import hpp from "hpp";
 import path from "path";
 import { fileURLToPath } from "url";
 
+dotenv.config();
 // 🧩 Local Imports
 import "./config/passport.js";
 import "./config/customerPassport.js"; // Customer Google OAuth (separate strategy)
@@ -42,11 +47,8 @@ import bulkUploadRoutes from "./routes/bulkUpload.routes.js";
 import customerRoutes from "./routes/customerAuth.routes.js";
 import orderRoutes from "./routes/order.routes.js";
 import adminOrderRoutes from "./routes/adminOrder.routes.js";
+import reviewRoutes from "./routes/review.routes.js";
 
-// ===============================================
-// 🧠 Environment Config
-// ===============================================
-dotenv.config();
 const app = express();
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const routePrefix = "/api/v1";
@@ -175,6 +177,7 @@ app.use(`${routePrefix}/bulk-upload`, bulkUploadRoutes);
 app.use(`${routePrefix}/customer`, customerRoutes);
 app.use(`${routePrefix}/orders`, orderRoutes);
 app.use(`${routePrefix}/admin/orders`, adminOrderRoutes);
+app.use(`${routePrefix}/reviews`, reviewRoutes);
 
 // ===============================================
 // 🩵 Health Check

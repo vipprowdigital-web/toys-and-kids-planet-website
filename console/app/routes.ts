@@ -44,6 +44,9 @@ export default [
       route("orders", "features/orders/index.tsx"),
       route("orders/:id", "features/orders/detail.tsx"),
 
+      // Product reviews — admin manage
+      route("product-reviews", "features/product-reviews/index.tsx"),
+
       // Single Routes -> Model / Pop Form / Chat Box / AI Agents / Etc.
 
       route("feedback", "features/feedback/index.tsx"),

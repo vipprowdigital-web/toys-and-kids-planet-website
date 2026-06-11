@@ -36,7 +36,7 @@ export default function CareerForm({
   // 🔥 ONE API CALL
   const handleSubmit = async () => {
     try {
-      console.log("FINAL PAYLOAD:", values);
+      // console.log("FINAL PAYLOAD:", values);
 
       // 🔗 yahin API call aayegi
       // await createCareer(values)

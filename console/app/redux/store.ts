@@ -63,6 +63,9 @@ import { productApi } from "~/features/products/data/productApi";
 // ⚙️  Orders Feature
 import { orderApi } from "~/features/orders/data/orderApi";
 
+// ⭐  Product Reviews Feature
+import { reviewApi } from "~/features/product-reviews/data/reviewApi";
+
 export const store = configureStore({
   reducer: {
     // ✅ App Configuration state + API
@@ -126,6 +129,9 @@ export const store = configureStore({
 
     // ✅ Orders API (admin)
     [orderApi.reducerPath]: orderApi.reducer,
+
+    // ✅ Product Reviews API (admin)
+    [reviewApi.reducerPath]: reviewApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
@@ -144,6 +150,7 @@ export const store = configureStore({
       productCategoryApi.middleware,
       productApi.middleware,
       orderApi.middleware,
+      reviewApi.middleware,
     ),
 });
 

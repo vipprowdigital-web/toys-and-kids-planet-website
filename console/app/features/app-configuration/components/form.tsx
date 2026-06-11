@@ -202,7 +202,7 @@ export default function AppConfigurationForm({
       {/* Form */}
       <form onSubmit={handleSubmit} className="space-y-10">
         {/* BASIC INFO */}
-        <Card className="backdrop-blur-lg bg-primary border border-border shadow-sm hover:shadow-lg transition-all duration-300">
+        <Card className="backdrop-blur-lg border border-border shadow-sm hover:shadow-lg transition-all duration-300">
           <CardHeader>
             <CardTitle className="text-base sm:text-lg font-semibold">
               Basic Information
@@ -266,7 +266,7 @@ export default function AppConfigurationForm({
           </CardHeader>
           <CardContent className="space-y-5">
             {values.companyAddress.map((addr, index) => {
-              console.log("isFrozen addr:", Object.isFrozen(addr));
+              // console.log("isFrozen addr:", Object.isFrozen(addr));
               return (
                 <motion.div
                   key={index}
