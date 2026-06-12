@@ -465,7 +465,7 @@ export default function Navbar() {
                             href={`/shop?age=${age.id}`}
                             className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm text-brand-gray hover:text-coral hover:bg-teal/10 transition-colors"
                           >
-                            <span className="text-base">{age.emoji}</span>
+                            {/* <span className="text-base">{age.emoji}</span> */}
                             {age.label}
                           </Link>
                         ))}

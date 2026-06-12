@@ -158,6 +158,7 @@ export default async function CategoriesPage() {
                       fill
                       className="object-cover transition-transform duration-700 group-hover:scale-110"
                       priority
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     />
                   ) : (
                     <div className={`w-full h-full ${cat.color || "bg-teal"}`} />

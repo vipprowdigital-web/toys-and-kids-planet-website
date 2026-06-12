@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import {
   User,
@@ -293,7 +293,7 @@ function AddressModal({
 
 // ─── Main Account Page ─────────────────────────────────────────────────────────
 
-export default function AccountPage() {
+function AccountPageInner() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const {
@@ -899,5 +899,19 @@ export default function AccountPage() {
         />
       )}
     </div>
+  );
+}
+
+export default function AccountPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen flex items-center justify-center bg-cream">
+          <Loader2 size={40} className="text-coral animate-spin" />
+        </div>
+      }
+    >
+      <AccountPageInner />
+    </Suspense>
   );
 }
