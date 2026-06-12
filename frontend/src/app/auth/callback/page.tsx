@@ -5,13 +5,13 @@
  * The backend redirects here after Google OAuth with ?token=<jwt>
  * We store it via the CustomerContext then redirect to account.
  */
-import { useEffect } from "react";
+import { useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Loader2 } from "lucide-react";
 import { useCustomer } from "@/context/CustomerContext";
 import { getMyProfile } from "@/lib/customerApi";
 
-export default function AuthCallbackPage() {
+function AuthCallbackInner() {
   const router = useRouter();
   const params = useSearchParams();
   const { login } = useCustomer();
@@ -40,5 +40,20 @@ export default function AuthCallbackPage() {
       <Loader2 size={40} className="text-coral animate-spin" />
       <p className="text-brand-gray font-medium">Signing you in…</p>
     </div>
+  );
+}
+
+export default function AuthCallbackPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-cream flex flex-col items-center justify-center gap-4">
+          <Loader2 size={40} className="text-coral animate-spin" />
+          <p className="text-brand-gray font-medium">Signing you in…</p>
+        </div>
+      }
+    >
+      <AuthCallbackInner />
+    </Suspense>
   );
 }

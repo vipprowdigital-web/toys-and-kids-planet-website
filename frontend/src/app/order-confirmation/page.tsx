@@ -1,6 +1,6 @@
 "use client";
-import { useEffect, useState } from "react";
-import { useSearchParams, useRouter } from "next/navigation";
+import { useEffect, useState, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -13,8 +13,6 @@ import {
 } from "lucide-react";
 import { useCustomer } from "@/context/CustomerContext";
 import { getMyOrderById, type OrderDoc } from "@/lib/customerApi";
-
-const STATUS_STEPS = ["placed", "confirmed", "processing", "shipped", "delivered"];
 
 function StatusBadge({ status }: { status: string }) {
   const colors: Record<string, string> = {
@@ -33,18 +31,17 @@ function StatusBadge({ status }: { status: string }) {
   );
 }
 
-export default function OrderConfirmationPage() {
+function OrderConfirmationInner() {
   const params = useSearchParams();
-  const router = useRouter();
   const { token } = useCustomer();
   const orderId = params.get("id");
   const orderNumber = params.get("num");
 
   const [order, setOrder] = useState<OrderDoc | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(() => Boolean(orderId && token));
 
   useEffect(() => {
-    if (!orderId || !token) { setLoading(false); return; }
+    if (!orderId || !token) return;
     getMyOrderById(token, orderId)
       .then((res) => { if (res.success) setOrder(res.data); })
       .catch(() => { })
@@ -183,5 +180,19 @@ export default function OrderConfirmationPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function OrderConfirmationPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-cream flex items-center justify-center">
+          <Loader2 size={40} className="text-coral animate-spin" />
+        </div>
+      }
+    >
+      <OrderConfirmationInner />
+    </Suspense>
   );
 }

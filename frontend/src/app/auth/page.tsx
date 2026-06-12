@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Mail, ArrowLeft, Loader2, RefreshCw } from "lucide-react";
 import {
@@ -12,7 +12,7 @@ import clsx from "clsx";
 
 type Step = "email" | "otp";
 
-export default function AuthPage() {
+function AuthPageInner() {
   const router = useRouter();
   const params = useSearchParams();
   const { login, isAuthenticated } = useCustomer();
@@ -375,5 +375,19 @@ export default function AuthPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function AuthPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-cream flex items-center justify-center">
+          <div className="w-8 h-8 border-4 border-coral border-t-transparent rounded-full animate-spin" />
+        </div>
+      }
+    >
+      <AuthPageInner />
+    </Suspense>
   );
 }
