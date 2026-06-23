@@ -94,19 +94,19 @@ export default async function FeaturedProducts() {
         </div> */}
 
         {/* Products Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-4 md:gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2  sm:gap-3">
           {featuredProducts.map((product) => (
             <ProductCard key={product._id} product={product} />
           ))}
         </div>
 
         {/* Load More */}
-        <div className="text-center mt-12">
+        {/* <div className="text-center mt-12">
           <Link href="/shop" className="btn-primary px-10!">
             View All Products
             <ArrowRight size={18} />
           </Link>
-        </div>
+        </div> */}
       </div>
     </section>
   );

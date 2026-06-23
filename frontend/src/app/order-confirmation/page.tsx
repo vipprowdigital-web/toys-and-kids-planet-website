@@ -107,7 +107,7 @@ function OrderConfirmationInner() {
               <div className="space-y-3">
                 {order.items.map((item, i) => (
                   <div key={i} className="flex gap-3 items-center">
-                    <div className="w-14 h-14 rounded-xl bg-gray-50 overflow-hidden flex-shrink-0">
+                    <div className="w-14 h-14 rounded-xl bg-gray-50 overflow-hidden shrink-0">
                       {item.image ? (
                         <Image src={item.image} alt={item.name} width={56} height={56} className="w-full h-full object-cover" />
                       ) : (
@@ -123,7 +123,7 @@ function OrderConfirmationInner() {
                       )}
                       <p className="text-xs text-brand-light-gray">Qty: {item.quantity}</p>
                     </div>
-                    <p className="font-semibold text-brand-navy text-sm flex-shrink-0">
+                    <p className="font-semibold text-brand-navy text-sm shrink-0">
                       ₹{(item.price * item.quantity).toLocaleString()}
                     </p>
                   </div>

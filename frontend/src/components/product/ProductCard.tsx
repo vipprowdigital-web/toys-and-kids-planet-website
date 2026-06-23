@@ -100,7 +100,7 @@ export default function ProductCard({ product }: ProductCardProps) {
   return (
     <Link
       href={`/product/${product.slug}`}
-      className="product-card block group sm:rounded-3xl rounded-xl!"
+      className="product-card block group rounded-none!"
     >
       {/* Image */}
       <div className="product-img-wrapper relative aspect-square bg-gray-50 sm:h-60 w-full">
@@ -113,21 +113,21 @@ export default function ProductCard({ product }: ProductCardProps) {
         />
 
         {/* Badges */}
-        <div className="absolute top-2 left-2 sm:top-3 sm:left-3 flex flex-col gap-1.5">
+        <div className="absolute top-2 left-0 sm:top-3 flex flex-col gap-1.5">
           {product.badge && (
             <span className={clsx("badge text-[9px] sm:text-xs", badgeClass)}>
               {product.badge}
             </span>
           )}
           {product.discount > 0 && (
-            <span className="badge text-[10px] sm:text-xs bg-brand-navy text-white">
+            <span className="badge text-[12px] sm:text-xs font-bold bg-white text-black">
               -{product.discount}%
             </span>
           )}
         </div>
 
         {/* Action buttons */}
-        <div className="absolute top-2 right-2 sm:top-3 sm:right-3 flex flex-col gap-2 opacity-100 translate-x-0 sm:opacity-0 sm:translate-x-4 sm:group-hover:opacity-100 sm:group-hover:translate-x-0 transition-all duration-300">
+        <div className="absolute bottom-2 right-2 sm:top-3 sm:right-3 flex flex-col gap-2 opacity-100 translate-x-0 sm:opacity-0 sm:translate-x-4 sm:group-hover:opacity-100 sm:group-hover:translate-x-0 transition-all duration-300">
           {/* Wishlist */}
           <button
             onClick={handleWishlist}
@@ -145,7 +145,7 @@ export default function ProductCard({ product }: ProductCardProps) {
           </button>
 
           {/* Quick View */}
-          <button
+          {/* <button
             onClick={(e) => {
               e.preventDefault();
               e.stopPropagation();
@@ -155,7 +155,7 @@ export default function ProductCard({ product }: ProductCardProps) {
             aria-label="Quick view"
           >
             <Eye size={16} />
-          </button>
+          </button> */}
         </div>
 
         {/* Out of stock overlay */}
@@ -176,7 +176,7 @@ export default function ProductCard({ product }: ProductCardProps) {
       </div>
 
       {/* Content */}
-      <div className="p-2 sm:p-4">
+      <div className="p-2 sm:p-4 bg-white">
         <h3 className="font-semibold text-brand-navy text-xs sm:text-sm leading-snug sm:mb-1 group-hover:text-coral transition-colors line-clamp-1">
           {product.name}
         </h3>
@@ -247,5 +247,3 @@ export default function ProductCard({ product }: ProductCardProps) {
     </Link>
   );
 }
-
-

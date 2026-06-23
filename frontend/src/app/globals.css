@@ -1,15 +1,18 @@
 /* ==========================================================================
    1. CORE IMPORTS (Must be at the absolute top)
    ========================================================================== */
-@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght=0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=Caveat:wght=500;600&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght=0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=Caveat:wght=500;600&display=swap"); */
+@import url("https://fonts.googleapis.com/css2?family=Baloo+2:wght@400..800&display=swap");
 @import "tailwindcss";
 
 /* ==========================================================================
    2. TAILWIND V4 THEME CONFIGURATION
    ========================================================================== */
 @theme {
-  --font-display: "Playfair Display", Georgia, serif;
-  --font-body: "DM Sans", system-ui, sans-serif;
+  --font-display: "Baloo 2", sans-serif;
+  /* --font-display: "Playfair Display", Georgia, serif; */
+  /* --font-body: "DM Sans", system-ui, sans-serif; */
+  --font-body: "Baloo 2", sans-serif;
   --font-accent: "Caveat", cursive;
 
   /* Custom Theme Colors */
@@ -118,7 +121,7 @@ body {
 }
 
 @utility badge {
-  @apply text-xs font-semibold px-2.5 py-1 rounded-full;
+  @apply text-xs font-semibold px-2.5 py-1 rounded-r-xl;
 }
 
 @utility badge-coral {
@@ -145,7 +148,11 @@ body {
 }
 
 @utility product-card {
-  @apply bg-white rounded-2xl overflow-hidden card-shadow cursor-pointer;
+  @apply bg-white overflow-hidden cursor-pointer;
+}
+
+.product-card:hover {
+  @apply card-shadow;
 }
 
 @utility star-rating {
