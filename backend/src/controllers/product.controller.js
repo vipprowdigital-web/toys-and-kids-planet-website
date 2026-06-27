@@ -116,6 +116,7 @@ const getAllProducts = async (req, res) => {
 
     const products = await Product.find(query)
       .populate("category", "name slug icon color")
+      .populate("vendor", "shopName slug logo rating")
       .sort({ createdAt: -1 })
       .skip(skip)
       .limit(limit);
@@ -150,7 +151,9 @@ const getProductById = async (req, res) => {
       ? { _id: slugOrId }
       : { slug: slugOrId };
 
-    const product = await Product.findOne(query);
+    const product = await Product.findOne(query)
+      .populate("category", "name slug")
+      .populate("vendor", "shopName slug logo description rating reviewCount");
     if (!product) {
       return res
         .status(404)

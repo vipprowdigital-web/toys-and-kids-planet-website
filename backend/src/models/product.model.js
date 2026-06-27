@@ -140,6 +140,13 @@ const productSchema = new mongoose.Schema(
       type: Boolean,
       default: true,
     },
+
+    // Multi-vendor: which shop owns this product (null = platform product)
+    vendor: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Vendor",
+      default: null,
+    },
   },
   {
     timestamps: true,

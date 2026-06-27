@@ -27,6 +27,7 @@ import {
   Boxes,
   Package,
   ShoppingBag,
+  Users,
 } from "lucide-react";
 import { NavMain } from "~/components/nav-main";
 import { NavProjects } from "~/components/nav-projects";
@@ -139,6 +140,12 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         url: "/admin/product-reviews",
         icon: UserStar,
         isActive: isActive("/admin/product-reviews"),
+      },
+      {
+        title: "Vendors",
+        url: "/admin/vendors",
+        icon: Users,
+        isActive: isActive("/admin/vendors"),
       },
     ],
 

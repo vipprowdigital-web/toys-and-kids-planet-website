@@ -3,7 +3,7 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Heart, ShoppingCart, Eye, Star, Check } from "lucide-react";
+import { Heart, ShoppingCart, Star, Check, Store } from "lucide-react";
 import clsx from "clsx";
 import type { Product } from "@/types";
 import { useCart } from "@/context/CartContext";
@@ -180,9 +180,19 @@ export default function ProductCard({ product }: ProductCardProps) {
         <h3 className="font-semibold text-brand-navy text-xs sm:text-sm leading-snug sm:mb-1 group-hover:text-coral transition-colors line-clamp-1">
           {product.name}
         </h3>
-        <p className="font-semibold text-gray-400 text-[11px] sm:text-xs leading-snug mb-1.5 group-hover:text-coral transition-colors line-clamp-1 ">
+        <p className="font-semibold text-gray-400 text-[11px] sm:text-xs leading-snug mb-1 group-hover:text-coral transition-colors line-clamp-1">
           {product.description}
         </p>
+        {product.vendor && typeof product.vendor === "object" && (
+          <Link
+            href={`/shops/${product.vendor.slug}`}
+            onClick={(e) => e.stopPropagation()}
+            className="inline-flex items-center gap-1 text-[10px] sm:text-xs text-teal hover:underline mb-1"
+          >
+            <Store size={10} />
+            {product.vendor.shopName}
+          </Link>
+        )}
 
         {/* Rating */}
         {product.rating > 0 && (

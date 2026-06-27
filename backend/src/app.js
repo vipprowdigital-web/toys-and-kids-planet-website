@@ -48,6 +48,9 @@ import customerRoutes from "./routes/customerAuth.routes.js";
 import orderRoutes from "./routes/order.routes.js";
 import adminOrderRoutes from "./routes/adminOrder.routes.js";
 import reviewRoutes from "./routes/review.routes.js";
+import vendorAuthRoutes from "./routes/vendorAuth.routes.js";
+import vendorRoutes from "./routes/vendor.routes.js";
+import vendorProductRoutes from "./routes/vendorProduct.routes.js";
 
 const app = express();
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -178,6 +181,10 @@ app.use(`${routePrefix}/customer`, customerRoutes);
 app.use(`${routePrefix}/orders`, orderRoutes);
 app.use(`${routePrefix}/admin/orders`, adminOrderRoutes);
 app.use(`${routePrefix}/reviews`, reviewRoutes);
+// Multi-vendor routes
+app.use(`${routePrefix}/vendor`, vendorAuthRoutes);
+app.use(`${routePrefix}/vendors`, vendorRoutes);
+app.use(`${routePrefix}/vendor/products`, vendorProductRoutes);
 
 // ===============================================
 // 🩵 Health Check

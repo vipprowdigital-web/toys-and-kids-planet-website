@@ -66,6 +66,12 @@ import { orderApi } from "~/features/orders/data/orderApi";
 // ⭐  Product Reviews Feature
 import { reviewApi } from "~/features/product-reviews/data/reviewApi";
 
+// 🏪 Vendor Management (admin)
+import { vendorApi } from "~/features/vendors/data/vendorApi";
+
+// 🏪 Vendor Products (vendor dashboard)
+import { vendorProductApi } from "~/features/vendor-products/data/vendorProductApi";
+
 export const store = configureStore({
   reducer: {
     // ✅ App Configuration state + API
@@ -132,6 +138,12 @@ export const store = configureStore({
 
     // ✅ Product Reviews API (admin)
     [reviewApi.reducerPath]: reviewApi.reducer,
+
+    // ✅ Vendor Management API (admin)
+    [vendorApi.reducerPath]: vendorApi.reducer,
+
+    // ✅ Vendor Products API (vendor dashboard)
+    [vendorProductApi.reducerPath]: vendorProductApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
@@ -151,6 +163,8 @@ export const store = configureStore({
       productApi.middleware,
       orderApi.middleware,
       reviewApi.middleware,
+      vendorApi.middleware,
+      vendorProductApi.middleware,
     ),
 });
 

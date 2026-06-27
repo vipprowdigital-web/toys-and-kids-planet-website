@@ -13,6 +13,18 @@ export default [
     route("sign-in", "routes/public/sign-in-wrapper.tsx"),
   ]),
 
+  // ── Vendor public routes (no sidebar, own layout) ─────────────────────────
+  route("vendor/sign-in", "vendor/sign-in/page.tsx"),
+  route("vendor/register", "vendor/register/page.tsx"),
+
+  route("vendor", "vendor/layout.tsx", [
+    layout("routes/vendor/VendorProtectedLayout.tsx", [
+      route("products", "features/vendor-products/index.tsx"),
+      route("products/create", "features/vendor-products/create-wrapper.tsx"),
+      route("products/edit/:id", "features/vendor-products/edit-wrapper.tsx"),
+    ]),
+  ]),
+
   route("admin", "admin/layout.tsx", [
     layout("routes/protected/ProtectedLayout.tsx", [
       route("dashboard", "routes/protected/dashboard-wrapper.tsx"),
@@ -47,13 +59,11 @@ export default [
       // Product reviews — admin manage
       route("product-reviews", "features/product-reviews/index.tsx"),
 
+      // ── Multi-vendor: platform admin vendor management ──────────────────
+      route("vendors", "features/vendors/index.tsx"),
+
       // Single Routes -> Model / Pop Form / Chat Box / AI Agents / Etc.
-
       route("feedback", "features/feedback/index.tsx"),
-
-      // Add other custom routes freelya
-      //   route("reports", "features/reports/index.tsx"),
-      //   route("reports/sales", "features/reports/sales-wrapper.tsx"),
     ]),
 
     route("users/profile", "routes/protected/user-wrapper.tsx"),

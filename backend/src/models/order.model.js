@@ -16,6 +16,12 @@ const orderItemSchema = new mongoose.Schema(
       size: String,
       sku: String,
     },
+    // Which vendor fulfilled this item (for payout attribution)
+    vendor: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Vendor",
+      default: null,
+    },
   },
   { _id: false },
 );

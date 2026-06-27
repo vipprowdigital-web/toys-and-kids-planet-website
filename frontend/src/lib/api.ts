@@ -45,6 +45,7 @@ async function apiFetch<T>(
 import type {
   Product,
   ProductCategory,
+  Vendor,
   Blog,
   AppConfig,
   PaginatedApiResponse,
@@ -290,6 +291,57 @@ export async function getBlogBySlug(
  */
 export async function getPublicAppConfig(): Promise<ApiResponse<AppConfig>> {
   return apiFetch<ApiResponse<AppConfig>>("/app-config/public");
+}
+
+// ─────────────────────────────────────────────
+// Vendors / Shops API
+// ─────────────────────────────────────────────
+
+export interface GetVendorsParams {
+  page?: number;
+  limit?: number;
+  search?: string;
+}
+
+export interface VendorProductsResponse {
+  success: boolean;
+  data: Product[];
+  vendor: Vendor;
+  pagination: {
+    total: number;
+    page: number;
+    limit: number;
+    totalPages: number;
+  };
+}
+
+export async function getVendors(
+  params: GetVendorsParams = {},
+): Promise<PaginatedApiResponse<Vendor>> {
+  const query = new URLSearchParams();
+  if (params.page) query.set("page", String(params.page));
+  if (params.limit) query.set("limit", String(params.limit));
+  if (params.search) query.set("search", params.search);
+  const qs = query.toString();
+  return apiFetch<PaginatedApiResponse<Vendor>>(`/vendors${qs ? `?${qs}` : ""}`);
+}
+
+export async function getVendorBySlug(slugOrId: string): Promise<ApiResponse<Vendor>> {
+  return apiFetch<ApiResponse<Vendor>>(`/vendors/${slugOrId}`);
+}
+
+export async function getVendorProducts(
+  slugOrId: string,
+  params: GetProductsParams = {},
+): Promise<VendorProductsResponse> {
+  const query = new URLSearchParams();
+  if (params.page) query.set("page", String(params.page));
+  if (params.limit) query.set("limit", String(params.limit));
+  if (params.search) query.set("search", params.search);
+  if (params.category) query.set("category", params.category);
+  if (params.ageGroup) query.set("ageGroup", params.ageGroup);
+  const qs = query.toString();
+  return apiFetch<VendorProductsResponse>(`/vendors/${slugOrId}/products${qs ? `?${qs}` : ""}`);
 }
 
 // ─────────────────────────────────────────────

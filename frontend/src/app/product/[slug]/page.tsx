@@ -25,6 +25,7 @@ import {
   ThumbsUp,
   Pencil,
   Trash2,
+  Store,
 } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { useCustomer } from "@/context/CustomerContext";
@@ -383,6 +384,22 @@ export default function ProductDetailPage({ params }: Props) {
             <h1 className="font-display text-3xl md:text-4xl font-bold text-brand-navy mb-3 leading-tight">
               {product.name}
             </h1>
+
+            {/* Vendor / Shop badge */}
+            {product.vendor && typeof product.vendor === "object" && (
+              <Link
+                href={`/shops/${product.vendor.slug}`}
+                className="inline-flex items-center gap-1.5 text-sm text-teal-dark font-medium hover:underline mb-3"
+              >
+                <Store size={14} />
+                Sold by {product.vendor.shopName}
+                {product.vendor.rating > 0 && (
+                  <span className="ml-1 text-xs text-brand-light-gray">
+                    ★ {product.vendor.rating.toFixed(1)}
+                  </span>
+                )}
+              </Link>
+            )}
 
             {/* Meta row */}
             <div className="flex flex-wrap items-center gap-3 mb-4">

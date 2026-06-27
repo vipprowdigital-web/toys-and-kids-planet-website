@@ -42,6 +42,18 @@ export interface ProductSpecifications {
   includedItems?: string[];
 }
 
+/** Vendor/Shop info (populated on product) */
+export interface Vendor {
+  _id: string;
+  shopName: string;
+  slug: string;
+  logo?: CloudinaryImage;
+  banner?: CloudinaryImage;
+  description?: string;
+  rating: number;
+  reviewCount: number;
+}
+
 /** Matches Product Mongoose model */
 export interface Product {
   _id: string;
@@ -65,6 +77,8 @@ export interface Product {
   soldCount: number;
   isFeatured: boolean;
   isActive: boolean;
+  /** Populated vendor/shop info (null for platform products) */
+  vendor?: Vendor | string | null;
   createdAt: string;
   updatedAt: string;
 }
